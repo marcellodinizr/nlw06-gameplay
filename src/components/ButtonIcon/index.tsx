@@ -10,6 +10,9 @@ import {
 import DiscordImg from "../../assets/discord.png";
 import { styles } from "./styles";
 
+/* creating a type for title, if necessary
+ use the Button Icon, changing the title=""
+ inside SigIn index.tsx */
 type Props = TouchableOpacityProps & {
 	title: string;
 };
