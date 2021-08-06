@@ -53,6 +53,9 @@ export function Home() {
 						data={appointments}
 						keyExtractor={(item) => item.id}
 						renderItem={({ item }) => <Appointment data={item} />}
+					ItemSeparatorComponent={() => <ListDivider />}
+					style={styles.matches}
+					showsVerticalScrollIndicator={false}
 					/>
 				</View>
 			</View>
