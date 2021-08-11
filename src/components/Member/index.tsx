@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
+import { theme } from "../../global/styles/theme";
 import { Avatar } from "../Avatar";
 import { styles } from "./styles";
 
@@ -24,8 +25,21 @@ export function Member({ data }: Props) {
 			<View>
 				<Text style={styles.title}>{data.username}</Text>
 
-				<View style={styles.nameStatus}>
-					<Text>{isOnline ? "Disponivel" : "Ocupado"}</Text>
+				<View style={styles.status}>
+					<View
+						style={[
+							styles.bulletStatus,
+							{
+								backgroundColor: isOnline
+									? theme.colors.on
+									: theme.colors.primary,
+							},
+						]}
+					/>
+
+					<Text style={styles.nameStatus}>
+						{isOnline ? "Disponivel" : "Ocupado"}
+					</Text>
 				</View>
 			</View>
 		</View>
