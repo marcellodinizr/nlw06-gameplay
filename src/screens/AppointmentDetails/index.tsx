@@ -8,8 +8,11 @@ import BannerImg from "../../assets/banner.png";
 
 import { Background } from "../../components/Background";
 import { ListHeader } from "../../components/ListHeader";
+import { ButtonIcon } from "../../components/ButtonIcon";
 import { Header } from "../../components/Header";
 import { Member } from "../../components/Member";
+import { ListDivider } from "../../components/ListDivider";
+
 import { styles } from "./styles";
 
 export function AppointmentDetails() {
@@ -24,7 +27,7 @@ export function AppointmentDetails() {
 			id: "2",
 			username: "Marcello",
 			avatar_url: "https://avatars.githubusercontent.com/u/58033960?v=4",
-			status: "online",
+			status: "offline",
 		},
 	];
 
@@ -56,7 +59,13 @@ export function AppointmentDetails() {
 				data={members}
 				keyExtractor={(item) => item.id}
 				renderItem={({ item }) => <Member data={item} />}
+				ItemSeparatorComponent={() => <ListDivider />}
+				style={styles.members}
 			/>
+
+			<View style={styles.footer}>
+				<ButtonIcon title="Entrar na partida" />
+			</View>
 		</Background>
 	);
 }
