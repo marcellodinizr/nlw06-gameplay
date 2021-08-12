@@ -1,71 +1,106 @@
-import React from "react";
-import { Fontisto } from "@expo/vector-icons";
-import { BorderlessButton } from "react-native-gesture-handler";
-import { ImageBackground, Text, View, FlatList } from "react-native";
+import React, { useState } from "react";
+import { Feather } from "@expo/vector-icons";
+import { RectButton } from "react-native-gesture-handler";
+
+import {
+	Text,
+	View,
+	ScrollView,
+	KeyboardAvoidingView,
+	Platform,
+} from "react-native";
 
 import { theme } from "../../global/styles/theme";
-import BannerImg from "../../assets/banner.png";
 
+import { CategorySelect } from "../../components/CategorySelect";
 import { Background } from "../../components/Background";
-import { ListHeader } from "../../components/ListHeader";
-import { ButtonIcon } from "../../components/ButtonIcon";
+import { SmallInput } from "../../components/SmallInput";
+import { GuildIcon } from "../../components/GuildIcon";
 import { Header } from "../../components/Header";
-import { Member } from "../../components/Member";
-import { ListDivider } from "../../components/ListDivider";
 
 import { styles } from "./styles";
+import { TextArea } from "../../components/TextArea";
 
 export function AppointmentCreate() {
-	const members = [
-		{
-			id: "1",
-			username: "Marcello",
-			avatar_url: "https://avatars.githubusercontent.com/u/58033960?v=4",
-			status: "online",
-		},
-		{
-			id: "2",
-			username: "Marcello",
-			avatar_url: "https://avatars.githubusercontent.com/u/58033960?v=4",
-			status: "offline",
-		},
-	];
+	const [category, setCategory] = useState("");
 
 	return (
-		<Background>
-			<Header
-				title="Detalhes"
-				action={
-					<BorderlessButton>
-						<Fontisto name="share" size={24} color={theme.colors.primary} />
-					</BorderlessButton>
-				}
-			/>
+		<KeyboardAvoidingView
+			style={styles.container}
+			behavior={Platform.OS === "ios" ? "padding" : "height"}
+		>
+			<ScrollView>
+				<Background>
+					<Header title="Agendar Partidas" />
 
-			<ImageBackground source={BannerImg} style={styles.banner}>
-				<View style={styles.bannerContent}>
-					<Text style={styles.title}>Lendários</Text>
-
-					<Text style={styles.subtitle}>
-						{" "}
-						É hoje que vamos chegar ao challenger sem perder uma partida da md10
+					<Text
+						style={[
+							styles.label,
+							{ marginLeft: 24, marginTop: 36, marginBottom: 18 },
+						]}
+					>
+						Categoria
 					</Text>
-				</View>
-			</ImageBackground>
 
-			<ListHeader title="Jogadores" subtitle="Total 3" />
+					<CategorySelect
+						hasCheckBox
+						setCategory={setCategory}
+						categorySelected={category}
+					/>
 
-			<FlatList
-				data={members}
-				keyExtractor={(item) => item.id}
-				renderItem={({ item }) => <Member data={item} />}
-				ItemSeparatorComponent={() => <ListDivider />}
-				style={styles.members}
-			/>
+					<View style={styles.form}>
+						<RectButton>
+							<View style={styles.select}>
+								{
+									// <View style={styles.image} />
+									<GuildIcon />
+								}
+								<View style={styles.selectBody}>
+									<Text style={styles.label}>Selecione um servidor</Text>
+								</View>
+								<Feather
+									name="chevron-right"
+									color={theme.colors.heading}
+									size={18}
+								/>
+							</View>
+						</RectButton>
 
-			<View style={styles.footer}>
-				<ButtonIcon title="Entrar na partida" />
-			</View>
-		</Background>
+						<View style={styles.field}>
+							<View>
+								<Text style={styles.label}>Dia e mês</Text>
+
+								<View style={styles.column}>
+									<SmallInput maxLength={2} />
+									<Text style={styles.dvider}>/</Text>
+									<SmallInput maxLength={2} />
+								</View>
+							</View>
+
+							<View>
+								<Text style={styles.label}>Hora e minuto</Text>
+
+								<View style={styles.column}>
+									<SmallInput maxLength={2} />
+									<Text style={styles.dvider}>:</Text>
+									<SmallInput maxLength={2} />
+								</View>
+							</View>
+						</View>
+
+						<View style={[styles.field, { marginBottom: 12 }]}>
+							<Text style={styles.label}>Descrição</Text>
+							<Text style={styles.caracteresLimit}>Max 100 caracteres</Text>
+						</View>
+						<TextArea
+							multiline
+							maxLength={100}
+							numberOfLines={5}
+							autoCorrect={false}
+						/>
+					</View>
+				</Background>
+			</ScrollView>
+		</KeyboardAvoidingView>
 	);
 }
