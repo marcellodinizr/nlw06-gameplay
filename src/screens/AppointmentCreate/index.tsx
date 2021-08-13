@@ -112,6 +112,10 @@ export function AppointmentCreate() {
 					</View>
 				</Background>
 			</ScrollView>
+
+			<ModalView visible={openGuildModal}>
+				<Guilds handleGuildSelect={handleGuildSelect} />
+			</ModalView>
 		</KeyboardAvoidingView>
 	);
 }
