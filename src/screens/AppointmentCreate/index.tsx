@@ -23,6 +23,17 @@ import { TextArea } from "../../components/TextArea";
 
 export function AppointmentCreate() {
 	const [category, setCategory] = useState("");
+	const [openGuildModal, setOpenGuildModal] = useState(false);
+	const [guild, setGuild] = useState<GuildProps>({} as GuildProps);
+
+	function handleOpenGuilds() {
+		setOpenGuildModal(true);
+	}
+
+	function handleGuildSelect(guildSelect: GuildProps) {
+		setGuild(guildSelect);
+		setOpenGuildModal(false);
+	}
 
 	return (
 		<KeyboardAvoidingView
