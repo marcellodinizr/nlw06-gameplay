@@ -2,7 +2,7 @@ import React from "react";
 import { View, FlatList } from "react-native";
 
 import { ListDivider } from "../../components/ListDivider";
-import { GuildProps } from "../../components/Appointment";
+import { GuildProps } from "../../components/Guild";
 import { Guild } from "../../components/Guild";
 import { styles } from "./styles";
 
