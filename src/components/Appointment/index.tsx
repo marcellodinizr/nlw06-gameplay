@@ -3,19 +3,14 @@ import { RectButton, RectButtonProps } from "react-native-gesture-handler";
 import { Text, View } from "react-native";
 
 import { styles } from "./styles";
+import { theme } from "../../global/styles/theme";
 import PlayerSvg from "../../assets/player.svg";
 import CalendarSvg from "../../assets/calendar.svg";
 
+import { GuildProps } from "../Guild";
 import { GuildIcon } from "../GuildIcon";
 import { categories } from "../../utils/categories";
-import { theme } from "../../global/styles/theme";
-
-export type GuildProps = {
-	id: string;
-	name: string;
-	icon: null;
-	owner: boolean;
-};
+import { LinearGradient } from "expo-linear-gradient";
 
 export type AppointmentProps = {
 	id: string;
@@ -32,13 +27,16 @@ type Props = RectButtonProps & {
 export function Appointment({ data, ...rest }: Props) {
 	const [category] = categories.filter((item) => item.id === data.category);
 	const { owner } = data.guild;
-	const { primary, on } = theme.colors;
 
 	return (
 		<RectButton {...rest}>
 			<View style={styles.container}>
-				<GuildIcon />
-
+				<LinearGradient
+					style={styles.guildIconContainer}
+					colors={[theme.colors.secondary50, theme.colors.secondary40]}
+				>
+					<GuildIcon />
+				</LinearGradient>
 				<View style={styles.content}>
 					<View style={styles.header}>
 						<Text style={styles.title}>{data.guild.name}</Text>
@@ -53,9 +51,18 @@ export function Appointment({ data, ...rest }: Props) {
 						</View>
 
 						<View style={styles.playersInfo}>
-							<PlayerSvg fill={owner ? primary : on} />
+							<PlayerSvg
+								fill={owner ? theme.colors.primary : theme.colors.on}
+							/>
 
-							<Text style={[styles.player, { color: owner ? primary : on }]}>
+							<Text
+								style={[
+									styles.player,
+									{
+										color: owner ? theme.colors.primary : theme.colors.on,
+									},
+								]}
+							>
 								{owner ? "Anfitrião" : "Visitante"}
 							</Text>
 						</View>
