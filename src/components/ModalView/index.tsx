@@ -11,9 +11,10 @@ import { styles } from "./styles";
 
 type Props = ModalProps & {
 	children: ReactNode;
+	closeModal: () => void;
 };
 
-export function ModalView({ children, ...rest }: Props) {
+export function ModalView({ children, closeModal, ...rest }: Props) {
 	return (
 		<Modal transparent animationType="slide" statusBarTranslucent {...rest}>
 			<TouchableWithoutFeedback onPress={closeModal}>
