@@ -35,9 +35,9 @@ export default function App() {
 				translucent
 			/>
 
-			<AuthProvider>
-				<Routes />
-			</AuthProvider>
+			{/* <AuthProvider> */}
+			<Routes />
+			{/* </AuthProvider> */}
 		</Background>
 	);
 }

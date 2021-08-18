@@ -3,7 +3,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import { styles } from "./styles";
 import { theme } from "../../global/styles/theme";
 
-
 type Props = {
 	children: ReactNode;
 };
